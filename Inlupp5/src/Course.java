@@ -3,13 +3,13 @@ public class Course {
 	private Book book; 
 	private int hp;
 	private String question;
-	private String[] answer;
+	private String[] answers;
 
 	public Course(String n, Book b, int hp, String q, String[] a) {
 		this.name = n;
 		this.book = b;
 		this.hp = hp;
 		this.question = q;
-		this.answer = a;
+		this.answers = a;
 	}
 }

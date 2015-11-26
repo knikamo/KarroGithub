@@ -1,4 +1,4 @@
-public class Creature {
+abstract class Creature {
 	private String room;
 
 	public Creature(String room)  {
