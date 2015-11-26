@@ -5,14 +5,14 @@ public class Student extends Creature {
 	private Course completedCourse;
 	private ArrayList<Book> books;
 
-	public Student(Room r, Course ongoingCourse, Course completedCourse, Book[] books) {
+	public Student(String r, Course ongoingCourse, Course completedCourse, ArrayList<Book> books) {
 		super(r);
 		this.ongoingCourse = ongoingCourse;
-		this.completedCourse = completedcCourse;
+		this.completedCourse = completedCourse;
 		this.books = books;
 	}
 
 	public String toString() {
-		return "S";
+		return "S: " + this.name;
 	}
 }

@@ -1,0 +1,2 @@
+A0; Room 1357; X; X; X; Hallway 4; X; X; X; False
+B0; Hallway 4; X; Room 1357; X; X; X; False; X; X

@@ -1,7 +1,7 @@
 public class Teacher extends Creature {
 	private Course course;
 	
-	public Teacher (Room r, Course c) {
+	public Teacher (String r, Course c) {
 		super(r);
 		this.course = c;
 	}
