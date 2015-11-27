@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Backpack {
+public class Backpack extends ListToString {
 	private double maxvolume;
 	private double currentvolume;
 	private ArrayList<Item> items;
