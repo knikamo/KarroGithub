@@ -1,35 +1,55 @@
 import java.util.ArrayList;
 import java.lang.NullPointerException;
+import java.lang.IndexOutOfBoundsException;
 
-public class Room extends ListToString {
+public class Room implements ListToString {
 	private String name;
 	private Room[] rooms;
 	private Boolean[] openDoors;
 	private ArrayList<Item> items;
 	private ArrayList<Creature> creatures;
 
-	public Room(String name, Room[] r, Boolean[] od, ArrayList<Item> i, ArrayList<Creature> c) {
+	public Room(String name, Boolean[] od, ArrayList<Item> i, ArrayList<Creature> c) {
 		this.name = name;
-		this.rooms = r;
 		this.openDoors = od;
 		this.items = i;
 		this.creatures = c;
 	}
-
-	public String getName() {
-		try  {
-		
-		return this.name; } 
-
-		catch (NullPointerException n) {
-			return "Wall";
-		}
+	public Room(String name, Boolean[] od) {
+		this.name = name;
+		this.openDoors = od;
+		this.items = new ArrayList<Item>();
+		this.creatures = new ArrayList<Creature>();
 	}
+
+	public String getName() throws NullPointerException {
+		return this.name;
+	}
+
+	public void setRooms(Room[] rooms) {
+		this.rooms = rooms;
+	}
+
 	public String toString() {
-		String s = "Room:" + name + "\n";
-		s += "Items: " + arrListToString(items) + "\n";
-		s += "Creatures: " + arrListToString(creatures) + "\n";
-		s += "Doors from this room: " + roomsToString() + "\n";
+		String creatureString = "";
+		String itemString = "";
+		try {
+			itemString = arrListToString(items); } 
+		catch (IndexOutOfBoundsException e) {
+			itemString = "(nothing)";
+		}
+		try {
+			creatureString = arrListToString(creatures); } 
+		catch (IndexOutOfBoundsException e) {
+			creatureString = "(nothing)";
+		}
+
+		String s = "============================================\n";
+		s += "Room: " + name + "\n";
+		s += "Items: " + itemString + "\n";
+		s += "Creatures: " + creatureString + "\n";
+		s += "Doors from this room: \n" + roomsToString();
+		s += "============================================";
 		return s;
 	}
 	private String openToString(int index) {
@@ -38,16 +58,29 @@ public class Room extends ListToString {
 	}
 	private String roomsToString() {
 		String s;
-		s = "North: " + rooms[0].getName() + rooms[0].openToString(0);
-		s += "East: " + rooms[1].getName() + rooms[1].openToString(1);
-		s += "South: " + rooms[2].getName() + rooms[2].openToString(2);
-		s += "West: " + rooms[3].getName() + rooms[3].openToString(3);
+		String[] neighbourNames = new String[4];
+		
+		for (int i = 0; i < 4; i++) {
+		try {
+			neighbourNames[i] = rooms[i].getName(); 
+			neighbourNames[i] += " " + openToString(i);
+		}
+		catch (NullPointerException e) {
+				neighbourNames[i] = "(Wall)";
+			}
+		}
+
+		s = " * North: " + neighbourNames[0] + "\n";
+		s += " * East: " + neighbourNames[1] + "\n";
+		s += " * South: " + neighbourNames[2] + "\n";
+		s += " * West: " + neighbourNames[3] + "\n";
 
 		return s;
 	}
-	/*
-	private String arrListToString(ArrayList arrList) {
+
+	public String arrListToString(ArrayList arrList) throws IndexOutOfBoundsException {
 		String s;
+
 		Object current = arrList.get(0);
 		
 		s = current.toString();	
@@ -58,5 +91,6 @@ public class Room extends ListToString {
 			s += current.toString(); 
 		}
 		return s;
-	} */
+	}
+
 }

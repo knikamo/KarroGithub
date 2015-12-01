@@ -1,15 +1,16 @@
 import java.util.ArrayList;
+import java.lang.IndexOutOfBoundsException;
 
-public class Backpack extends ListToString {
-	private double maxvolume;
-	private double currentvolume;
+public class Backpack implements ListToString {
+	private double maxVolume;
+	private double currentVolume;
 	private ArrayList<Item> items;
 
 	// set maxvolume to 10
 	// set currentvolume to 0
 	public Backpack () { 
-		maxvolume = 10.0;
-		currentvolume = 0.0;
+		maxVolume = 10.0;
+		currentVolume = 0.0;
 
 	} 
 
@@ -18,12 +19,15 @@ public class Backpack extends ListToString {
 	public void addtobackpack (Item addItem) {
 		double itemVolume = addItem.getVolume();
 
-		double checkSpace = currentvolume+itemVolume;
-		if(checkSpace<=maxvolume)
+		double checkSpace = currentVolume+itemVolume;
+		if(checkSpace<=maxVolume)
 			{
-				currentvolume += itemVolume;
+				currentVolume += itemVolume;
 				(this.items).add(addItem);
 			}
+		else {
+			System.out.print("Backpack is not big enough for that item. Current empty space in backpack: " + currentVolume);
+		}
 
 
 	}
@@ -34,13 +38,16 @@ public class Backpack extends ListToString {
 		Boolean hasDropped = (this.items).remove(dropItem);
 		if (hasDropped)
 			{
-			currentvolume -= itemVolume;
+			currentVolume -= itemVolume;
 			}
 	}
 
 	public String toString() {
 		String s = "Backpack: ";
-		s += arrListToString(items);
+		try {
+		s += arrListToString(items); } catch (IndexOutOfBoundsException e) {
+			s += "(empty)";
+		}
 		/*
 		Item currentItem = items.get(0);
 		s += currentItem.toString();	
@@ -53,6 +60,20 @@ public class Backpack extends ListToString {
 
 		return s;
 
+	}
+
+	public String arrListToString(ArrayList arrList) throws IndexOutOfBoundsException {
+		String s;
+		Object current = arrList.get(0);
+		
+		s = current.toString();	
+
+		for (int i = 1; i < arrList.size(); i++) {
+			s += ", ";
+			current = arrList.get(i);
+			s += current.toString(); 
+		}
+		return s;
 	}	 
 }
 	

@@ -1,12 +1,12 @@
 public class Teacher extends Creature {
 	private Course course;
 	
-	public Teacher (String r, Course c) {
-		super(r);
+	public Teacher (String room, String name, Course c) {
+		super(room, name);
 		this.course = c;
 	}
 
 	public String toString() {
-	return "T";
+	return getName() + "(teacher)";
 	}
 }

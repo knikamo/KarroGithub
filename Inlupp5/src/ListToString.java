@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.lang.IndexOutOfBoundsException;
 
-abstract class ListToString {
+public interface ListToString {
 		
-		public static String arrListToString(ArrayList arrList) {
+		public String arrListToString(ArrayList arrList) throws IndexOutOfBoundsException; /* {
 		String s;
 		Object current = arrList.get(0);
 		
@@ -14,6 +15,6 @@ abstract class ListToString {
 			s += current.toString(); 
 		}
 		return s;
-	}
+	}*/
 
 }
