@@ -1,7 +1,7 @@
 public class Key extends Item {
 	
-	public Key (double volume) {
-		super(volume);
+	public Key () {
+		super(1.0);
 	}
 
 	public String toString() {

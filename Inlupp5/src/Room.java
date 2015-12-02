@@ -30,6 +30,31 @@ public class Room implements ListToString {
 		this.rooms = rooms;
 	}
 
+	public void addToRoom(Object o) {
+		if (o instanceof Item) {
+			Item i = (Item) o;
+			items.add(i);
+		}
+		else if (o instanceof Creature) {
+			Creature c = (Creature) o;
+			creatures.add(c);
+		}
+		else {
+			System.out.println("Not a valid object to put in room");
+		}
+	}
+
+	public Avatar avatarInRoom() {
+		for (int i = 0; i < creatures.size(); i ++) {
+			Creature crnt = creatures.get(i);
+			if (crnt instanceof Avatar) {
+				Avatar a = (Avatar) crnt;
+				return a;
+		}
+	}
+		return null;
+	}
+
 	public String toString() {
 		String creatureString = "";
 		String itemString = "";
@@ -49,6 +74,11 @@ public class Room implements ListToString {
 		s += "Items: " + itemString + "\n";
 		s += "Creatures: " + creatureString + "\n";
 		s += "Doors from this room: \n" + roomsToString();
+		Avatar a = avatarInRoom();
+		if (a != null) {
+			s += "--------------------------------------------\n";
+			s+= a.backpackToString() + "\n";
+		}
 		s += "============================================";
 		return s;
 	}
@@ -66,14 +96,14 @@ public class Room implements ListToString {
 			neighbourNames[i] += " " + openToString(i);
 		}
 		catch (NullPointerException e) {
-				neighbourNames[i] = "(Wall)";
+				neighbourNames[i] = "-----";
 			}
 		}
 
-		s = " * North: " + neighbourNames[0] + "\n";
-		s += " * East: " + neighbourNames[1] + "\n";
-		s += " * South: " + neighbourNames[2] + "\n";
-		s += " * West: " + neighbourNames[3] + "\n";
+		s = " * N: " + neighbourNames[0] + "\n";
+		s += " * E: " + neighbourNames[1] + "\n";
+		s += " * S: " + neighbourNames[2] + "\n";
+		s += " * W: " + neighbourNames[3] + "\n";
 
 		return s;
 	}

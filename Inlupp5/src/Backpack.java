@@ -11,12 +11,13 @@ public class Backpack implements ListToString {
 	public Backpack () { 
 		maxVolume = 10.0;
 		currentVolume = 0.0;
+		items = new ArrayList<Item>();
 
 	} 
 
 
 	// Add and checks if valid add
-	public void addtobackpack (Item addItem) {
+	public void addToBackpack (Item addItem) {
 		double itemVolume = addItem.getVolume();
 
 		double checkSpace = currentVolume+itemVolume;
@@ -26,14 +27,14 @@ public class Backpack implements ListToString {
 				(this.items).add(addItem);
 			}
 		else {
-			System.out.print("Backpack is not big enough for that item. Current empty space in backpack: " + currentVolume);
+			System.out.println("Backpack is not big enough for that item. Current empty space in backpack: " + currentVolume);
 		}
 
 
 	}
 
 	// Drop and checks if valid drop
-	public void dropfrombackpack (Item dropItem) {
+	public void dropFromBackpack (Item dropItem) {
 		double itemVolume = dropItem.getVolume();
 		Boolean hasDropped = (this.items).remove(dropItem);
 		if (hasDropped)
@@ -46,18 +47,9 @@ public class Backpack implements ListToString {
 		String s = "Backpack: ";
 		try {
 		s += arrListToString(items); } catch (IndexOutOfBoundsException e) {
-			s += "(empty)";
+			s += "-----";
 		}
-		/*
-		Item currentItem = items.get(0);
-		s += currentItem.toString();	
-
-		for (int i = 1; i < items.size(); i++) {
-			s += ", ";
-			currentItem = items.get(i);
-			s += currentItem.toString(); 
-		} */
-
+		s += "\n Volume: " + currentVolume + " litres   (Empty space: " + (maxVolume-currentVolume) + " litres)";
 		return s;
 
 	}
